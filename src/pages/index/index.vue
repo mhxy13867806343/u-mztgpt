@@ -1,48 +1,40 @@
-<template>
-  <view class="content">
-    <image class="logo" src="/static/logo.png"></image>
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-    </view>
-  </view>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      title: 'Hello',
-    }
-  },
-  onLoad() {},
-  methods: {},
+<script setup>
+const onClickDetlis = (item) => {
+	uni.navigateTo({
+		url: `/pages/mmDetails/mmDetails?id=${item}`
+	})
 }
 </script>
+<template>
+	<view class="mm waterfall-content tabber-content-list">
+		<view v-for="(item,index) in 200" :key="index" class="waterfall-content-list" @click="onClickDetlis(item)">
+			<view class="icon-comment">
+				<text class="iconfont icon-pinglun1"><text class="icon-count-num">10</text></text>
+				<image lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg" />
+			</view>
+			<view class="list-text van-ellipsis waterfall-content-list-text list-text-gress">
+				组件默认宽度 320px、高度 240px；app-nvue平台，暂时默认为屏幕宽度、高度 240px；h5平台，暂时默认为屏幕宽度、高度 240px
+			</view>
+			<view class="icon-count">
+				<text class="iconfont icon-liulan"><text class="icon-count-num">10</text></text>
+				<text class="iconfont icon-shoucang"><text class="icon-count-num">10</text></text>
+			</view>
+		</view>
+	</view>
+</template>
 
-<style>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+
+<style lang="scss" scoped>
+@import "~@/static/style/pub.scss";
+.iconfont{
+	font-size: 28rpx;
 }
-
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+.icon-pinglun1{
+	position: absolute;
+	top:0;
+	right: 0;
+	z-index: 12;
+	color: #fff;
 }
 </style>

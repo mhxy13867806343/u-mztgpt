@@ -66,6 +66,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/mmDetails/mmDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "色诱",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
