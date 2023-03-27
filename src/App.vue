@@ -27,6 +27,12 @@ export default {
 	display: flex;
 	justify-content: space-between;
 }
+.flex-start{
+	justify-content: flex-start;
+}
+.flex-end{
+	justify-content: flex-end;
+}
 .waterfall-content{
 	margin:30rpx;
 	column-count: 2;
@@ -39,6 +45,9 @@ export default {
 	padding: 21rpx 0;
 	
 }
+.flex-1{
+	flex:1
+}
 uni-image{
 	border-radius: 10rpx;
 }
@@ -50,5 +59,14 @@ uni-image{
 }
 .tabber-content-list{
 	padding-bottom: calc(var(--window-bottom) / 2);
+}
+.text-right{
+	text-align: right;
+}
+.text-left{
+	text-align: left;
+}
+.text-center{
+	text-align: center;
 }
 </style>

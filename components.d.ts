@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Emoji: typeof import('./src/components/Emoji/Emoji.vue')['default']
     MCooment: typeof import('./src/components/MCooment/MCooment.vue')['default']
     MSearch: typeof import('./src/components/MSearch/MSearch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

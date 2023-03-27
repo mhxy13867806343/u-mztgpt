@@ -55,7 +55,9 @@ const fabContentList=ref([
 		active: false
 	}
 ])
-
+const sendText=ref('')//评论内容
+const sendTextLen=ref(0)//评论内容长度
+const isCommentShow=ref(false)//
 onMounted(()=>{
 	const _contentDetailsRef=contentDetailsRef.value
 	stickyRef.value=_contentDetailsRef.$el.clientHeight
@@ -102,6 +104,10 @@ const onClickSelect = (option) => {
 	showShare.value = false;
 	popMenuShow.value=true
 };
+// 评论
+const onInputBoxClear=e=>{
+	console.log(e)
+}
 </script>
 <template>
 	<view class="content-details" ref="contentDetailsRef">
@@ -126,13 +132,16 @@ const onClickSelect = (option) => {
 		<van-divider>详情结束</van-divider>
 	</view>
 	<van-sticky>
+		<view class="v-comments text-right" @click="isCommentShow=true">写评论</view>
 		<view class="v-comment-top">
+			
 			<van-tabs v-model:active="activeName" shrink animated swipeable>
 				<van-tab>
 					<template #title>
 						<view class="icon-count icon-tabs">
 							<view class="icon-comment">
 								<text>评论<text class="icon-count-num1">10</text></text>
+							
 							</view>
 						</view>
 					</template>
@@ -141,12 +150,13 @@ const onClickSelect = (option) => {
 					              :style="{height:isT?(stickyRefNum+'px'):'auto'}"
 					
 					>
-<!--						<MCooment :list="[]"/>-->
+						<MCooment :list="[]"/>
+						
 						<van-empty image-size="40" description="暂无评论" />
 					</scroll-view>
 				</van-tab>
 			</van-tabs>
-			<view class="v-comments" v-if="activeName===0">写评论</view>
+			
 		</view>
 	</van-sticky>
 	<uni-fab ref="fab"  :content="fabContentList" horizontal="right" vertical="bottom"
@@ -159,6 +169,13 @@ const onClickSelect = (option) => {
 		@close="onClickClose"
 		@cancel="onClickClose"
 	/>
+	<view class="edit-input-comment"   v-if="isCommentShow">
+		<Emoji  v-model:inputBox="sendText" v-model:inputLen="sendTextLen"
+		        @clear="onInputBoxClear"
+		      
+		
+		/>
+	</view>
 </template>
 
 
@@ -182,13 +199,17 @@ const onClickSelect = (option) => {
 }
 .v-comment-top{
 	position: relative;
-	.v-comments{
-		position: absolute;
-		right: 20rpx;
-		font-size: 24rpx;
-		top: 10%;
-		transform: translate(0, 10%);
-	}
-}
 
+}
+.v-comments{
+	font-size: 24rpx;
+	padding:0 30rpx;
+}
+.edit-input-comment{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 12;
+}
 </style>
