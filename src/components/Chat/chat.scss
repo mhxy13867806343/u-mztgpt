@@ -1,0 +1,12 @@
+.scroll-Y{
+  max-height: 600rpx;
+}
+::v-deep .van-cell-group__title{
+  text-align: right;
+}
+.van-cell--clickable-radio{
+  align-items: flex-start;
+  ::v-deep .van-radio__icon--round{
+    margin-right: 20rpx;
+  }
+}

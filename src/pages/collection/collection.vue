@@ -2,9 +2,8 @@
 </script>
 
 <template>
-	<view>
-		collection
-	</view>
+	<MSearch></MSearch>
+	<MList :list="[]" />
 </template>
 
 
