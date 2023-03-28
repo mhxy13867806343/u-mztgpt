@@ -1,4 +1,6 @@
 <script setup>
+import {showToast,showNotify} from "vant";
+
 defineProps({
 	data:{
 		type:Array,
@@ -6,10 +8,21 @@ defineProps({
 	}
 })
 const emit=defineEmits(['change'])
-const checked=ref('1')
+const checked=ref('')
 const onClickRadio=item=>{
 	checked.value=item
 	emit('change',item)
+}
+const onClickSelect=()=>{
+	if(!checked.value){
+		showNotify({
+			message: '请选择一个key',
+			color: '#ad0000',
+			background: '#ffe1e1',
+		});
+		return
+	}
+	emit('change',checked.value)
 }
 defineExpose({
 	onClickRadio
@@ -17,6 +30,9 @@ defineExpose({
 </script>
 <template>
 	<view class="chat">
+		<view class="text-right o-select">
+			<van-button type="primary" size="mini" @click="onClickSelect">选择</van-button>
+		</view>
 		<van-radio-group v-model="checked">
 		<van-cell-group inset :title="`共${data.length}条记录`">
 			<scroll-view  scroll-y="true" class="scroll-Y">
@@ -37,4 +53,7 @@ defineExpose({
 
 <style scoped lang="scss">
 @import "../chat.scss";
+.o-select{
+	padding-right: 30rpx;
+}
 </style>

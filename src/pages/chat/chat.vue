@@ -36,16 +36,10 @@ const actionsPopList=ref([
 	}
 ])
 const onClickPop=item=>{
-
-	if(item.value!==5){
-		typePopValue.value=item.value
-		showCenter.value=true
-		showPopover.value=false
-	}else{
-		uni.navigateTo({
-			url:'/pages/level/level'
-		})
-	}
+	
+	typePopValue.value=item.value
+	showCenter.value=true
+	showPopover.value=false
 }
 </script>
 
@@ -78,6 +72,7 @@ const onClickPop=item=>{
 			<toggle v-if="typePopValue===2"/>
 			<save v-if="typePopValue===3"/>
 			<dels v-if="typePopValue===4"/>
+			<levels v-if="typePopValue===5"/>
 		</view>
 	</van-popup>
 	
@@ -93,7 +88,7 @@ const onClickPop=item=>{
 	color: #fff;
 }
 .tel-pop{
-	height:560rpx;
+	height:auto;
 	background: #fff;
 }
 </style>
