@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Adds: typeof import('./src/components/Chat/adds/adds.vue')['default']
     Dels: typeof import('./src/components/Chat/dels/dels.vue')['default']
     Emoji: typeof import('./src/components/Emoji/Emoji.vue')['default']
     Levels: typeof import('./src/components/Chat/levels/levels.vue')['default']
@@ -25,6 +26,8 @@ declare module '@vue/runtime-core' {
     VanCellGroup: typeof import('vant/es')['CellGroup']
     VanDivider: typeof import('vant/es')['Divider']
     VanEmpty: typeof import('vant/es')['Empty']
+    VanField: typeof import('vant/es')['Field']
+    VanForm: typeof import('vant/es')['Form']
     VanIcon: typeof import('vant/es')['Icon']
     VanList: typeof import('vant/es')['List']
     VanNavBar: typeof import('vant/es')['NavBar']

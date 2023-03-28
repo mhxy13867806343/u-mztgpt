@@ -14,7 +14,6 @@ export default {
 
 <style>
 /*每个页面公共css */
-@import "static/inconfont/iconfont.css";
 .list-text{
 	font-size: 26rpx;
 	line-height: 40rpx;

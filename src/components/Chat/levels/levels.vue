@@ -1,9 +1,17 @@
 <script setup>
+const emit=defineEmits(['click-levels'])
 const onClickRouter=()=>{
+	emit('click-levels')
 	uni.navigateTo({
-		url:'/pages/level/level'
+		url:'/pages/level/level',
+		complete:()=>{
+		
+		}
 	})
 }
+defineExpose({
+	onClickRouter
+})
 </script>
 
 <template>
@@ -13,7 +21,7 @@ const onClickRouter=()=>{
 			<image lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg" />
 			<view class="auth">作者xxxxx <view>lv <text class="num">3</text>共<text class="start">1110</text>/<text class="end">3000</text></view></view>
 		</view>
-		<van-icon name="question" @click="onClickRouter" />
+		<text class="iconfont icon-wenhao" @click="onClickRouter"></text>
 	</view>
 </template>
 

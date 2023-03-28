@@ -8,7 +8,7 @@ const { list, onSearch, onCancel,search}=useList()
 	<van-search
 		v-model="search"
 		:show-action="search.length"
-		placeholder="请输入搜索关键词"
+		placeholder="请输入想要搜索的内容"
 		@search="onSearch"
 		@cancel="onCancel"
 	/>
