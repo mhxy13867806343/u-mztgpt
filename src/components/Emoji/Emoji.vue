@@ -33,8 +33,10 @@ onMounted(() => {
 			const emojiItemAll=document.querySelectorAll('.emoji-item-img-url')
 			const emojiListLen=emojiList.value.length
 			for(let i=0;i<emojiContainerAll.length;i++){
-				const sum=emojiItemAll[i].height*(emojiListLen/24)
-				emojiContainerAll[i].style.maxHeight=sum+'px'
+				const sum=emojiItemAll[i].height*(emojiListLen/15)
+				emojiContainerAll[i].style.overflow='hidden'
+				emojiContainerAll[i].style.overflowY='scroll'
+				emojiContainerAll[i].style.height=sum+'rpx'
 			}
 		}
 	},200)
@@ -140,7 +142,9 @@ const onemojiTitleActive=index=>{
 </script>
 <template>
 	<div id="apps" ref="codeDom">
+
 		<div class="emoji-container">
+			<van-sticky>
 			<div class="input-box-container">
 				<div class="input-box-edit">
 					<div class="input-box" contenteditable="true" spellcheck="false" id="inputBox"
@@ -150,6 +154,7 @@ const onemojiTitleActive=index=>{
 				</div>
 				
 			</div>
+			</van-sticky>
 			<div class="input-action-position">
 				<div class="input-action-part">
 					<div @click="onClickDivInputBoxFocus" class=" iconfont icon-biaoqing icon-count flex-end flex-1"><span class="emoji-trgger"
@@ -157,11 +162,8 @@ const onemojiTitleActive=index=>{
 					></span></div>
 
 				</div>
-				<scroll-view  scroll-y="true" class="scroll-Y"  v-show="emojiShow" :style="{height:'200px'}">
+				<scroll-view  scroll-y="true" class="scroll-Y"  v-show="emojiShow" :style="{height:'400rpx'}">
 					<div class="input-action-absolute">
-						<span
-							@click="onemojiTitleActive(0)"
-							class="iconfont  icon-111" :class="[emojiTitleActive===0?'icon-biaoqing1-copy':'icon-biaoqing']"></span>
 						<div>
 							<div class="emoji-all-container">
 								<img  v-for="(item,index) in emojiList" :src="item.e_url" :key="index"
@@ -235,9 +237,9 @@ const onemojiTitleActive=index=>{
 	opacity: 0.57;
 }
  .emoji-all-container img{
-	width:60rpx;
-	height:60rpx;
-	padding:6rpx;
+	width:40rpx;
+	height:40rpx;
+	padding:4rpx;
 	cursor:pointer;
 }
 
@@ -245,7 +247,7 @@ const onemojiTitleActive=index=>{
 	width: 100%;
 	background: #fff;
 	box-shadow: 0 16rpx 48rpx rgb(0 0 0 / 16%);
-	border-radius: 4rx;
+	border-radius: 4rpx;
 }
 .icon-111{
 	padding: 20rpx;

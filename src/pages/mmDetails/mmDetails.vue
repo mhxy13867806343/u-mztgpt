@@ -26,7 +26,6 @@ const list=ref([
 	}
 ])//列表数据
 const current=ref(0)//当前索引
-const contentDetailsRef=ref(null)//内容详情
 const scrollYRef=ref(null)//内容详情
 const activeName=ref(0)//tabber切换
 const stickyRef=ref(0)//粘性布局
@@ -55,9 +54,12 @@ const fabContentList=ref([
 		active: false
 	}
 ])
-const sendText=ref('')//评论内容
-const sendTextLen=ref(0)//评论内容长度
-const isCommentShow=ref(false)//
+import useComment from '@/hooks/useComment'
+const { contentDetailsRef,
+	sendText,
+	sendTextLen,
+	isCommentShow,
+	onInputBoxClear}=useComment()
 onMounted(()=>{
 	const _contentDetailsRef=contentDetailsRef.value
 	stickyRef.value=_contentDetailsRef.$el.clientHeight
@@ -104,10 +106,6 @@ const onClickSelect = (option) => {
 	showShare.value = false;
 	popMenuShow.value=true
 };
-// 评论
-const onInputBoxClear=e=>{
-	console.log(e)
-}
 </script>
 <template>
 	<view class="content-details" ref="contentDetailsRef">
@@ -169,13 +167,20 @@ const onInputBoxClear=e=>{
 		@close="onClickClose"
 		@cancel="onClickClose"
 	/>
-	<view class="edit-input-comment"   v-if="isCommentShow">
-		<Emoji  v-model:inputBox="sendText" v-model:inputLen="sendTextLen"
-		        @clear="onInputBoxClear"
-		      
+	<van-popup
+		v-model:show="isCommentShow"
+		position="bottom"
 		
-		/>
-	</view>
+	>
+		<view class="edit-input-comment">
+			<Emoji  v-model:inputBox="sendText" v-model:inputLen="sendTextLen"
+			        @clear="onInputBoxClear"
+			
+			
+			/>
+		</view>
+	</van-popup>
+
 </template>
 
 
@@ -204,12 +209,5 @@ const onInputBoxClear=e=>{
 .v-comments{
 	font-size: 24rpx;
 	padding:0 30rpx;
-}
-.edit-input-comment{
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	z-index: 12;
 }
 </style>

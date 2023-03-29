@@ -40,7 +40,7 @@ const onClickDetlis = (item) => {
 		</van-list>
 	</van-pull-refresh>
 <!--	<van-empty image-size="100" description="描述文字" v-if="!list.length&&finished"/>-->
-	<van-back-top />
+
 </template>
 
 

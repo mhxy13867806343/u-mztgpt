@@ -12,6 +12,7 @@ const onClickSelect=(action)=>{
 
 <template>
 	<MList :list="[]" />
+	<van-back-top :bottom="80"/>
 	<van-divider>仅展示近24小时内容</van-divider>
 	<view class="clear text-center" @click="show=true">清空已查看的内容</view>
 	<van-action-sheet

@@ -59,21 +59,30 @@
         }
         ,{
             "path" : "pages/level/level",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "等级",
                 "enablePullDownRefresh": false
             }
-            
+
         }
         ,{
             "path" : "pages/mmDetails/mmDetails",
-            "style" :                                                                                    
+            "style" :
             {
-                "navigationBarTitleText": "色诱",
+                "navigationBarTitleText": "详情",
                 "enablePullDownRefresh": false
             }
-            
+
+        }
+        ,{
+            "path" : "pages/mmDetailsMore/mmDetailsMore",
+            "style" :
+            {
+                "navigationBarTitleText": "评论",
+                "enablePullDownRefresh": false
+            }
+
         }
     ],
 	"globalStyle": {
