@@ -31,7 +31,9 @@ const onClickDetlis = (item) => {
 			<view class="list-text van-ellipsis waterfall-content-list-text list-text-gress">
 				组件默认宽度 320px、高度 240px；app-nvue平台，暂时默认为屏幕宽度、高度 240px；h5平台，暂时默认为屏幕宽度、高度 240px
 			</view>
+            <view class="iconfont icon-shijian"><text class="icon-count-num">2023-1-2</text></view>
 			<view class="icon-count">
+				
 				<text class="iconfont icon-liulan"><text class="icon-count-num">10</text></text>
 				<text class="iconfont icon-shoucang"><text class="icon-count-num">10</text></text>
 			</view>
@@ -56,4 +58,5 @@ const onClickDetlis = (item) => {
 	z-index: 12;
 	color: #fff;
 }
+
 </style>

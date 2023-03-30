@@ -23,9 +23,10 @@ const onClickDetails=(id)=>{
 					<view class="comment-item-right-top">
 						<view class="comment-item-auth icon-count">
 							<text class="comment-item-auth-nick">作者信息</text>
-							<text class="comment-item-auth-reply">回复  <text class="iconfont icon-dianzan"></text>10</text>
+							<text class="comment-item-auth-reply"><text @click="$emit('onClickComment')">回复</text>  <text class="iconfont icon-dianzan"></text>10</text>
 						</view>
 						<view class="comment-item-cb">这里我们也需要给她加上安全距离，加上上面的.savepadding</view>
+                        <view class="list-text iconfont icon-shijian"><text class="icon-count-num">2023-1-2</text></view>
 						<view class="comment-text-count-num" @click="onClickDetails(1)">共10条评论 &gt;</view>
 					</view>
 					<view class="comment-item-right-bot icon-count">
@@ -34,11 +35,12 @@ const onClickDetails=(id)=>{
 						</view>
 						<view class="comment-item-auth flex-1 icon-count">
 							<text class="comment-item-auth-nick">作者信息</text>
-							<text class="comment-item-auth-reply">回复
+							<text class="comment-item-auth-reply" ><text @click="$emit('onClickComment')">回复</text>
 							   <text class="iconfont icon-dianzan"></text>10
 							</text>
 						</view>
 						<view class="comment-item-cb">这里我们也需要给她加上安全距离，加上上面的.savepadding</view>
+                        <view class="list-text iconfont icon-shijian"><text class="icon-count-num">2023-1-2</text></view>
 					</view>
 					
 				</view>

@@ -130,6 +130,7 @@ const onClickSelect = (option) => {
 		<view class="list-text waterfall-content-list-text list-text-gress">
 			组件默认宽度 320px、高度 240px；app-nvue平台，暂时默认为屏幕宽度、高度 240px；h5平台，暂时默认为屏幕宽度、高度 240px
 		</view>
+        <view class="list-text iconfont icon-shijian"><text class="icon-count-num">2023-1-2</text></view>
 		<van-divider>详情结束</van-divider>
 	</view>
 	<van-sticky>
@@ -141,7 +142,9 @@ const onClickSelect = (option) => {
 					<template #title>
 						<view class="icon-count icon-tabs">
 							<view class="icon-comment">
-								<text>评论<text class="icon-count-num1">10</text></text>
+								<text>
+									<text @click="isCommentShow=true">评论</text>
+									<text class="icon-count-num1">10</text></text>
 							
 							</view>
 						</view>
@@ -151,7 +154,7 @@ const onClickSelect = (option) => {
 					              :style="{height:isT?(stickyRefNum+'px'):'auto'}"
 					
 					>
-						<MCooment :list="[]"/>
+						<MCooment :list="[]" @onClickComment="isCommentShow=true"/>
 						
 						<van-empty image-size="40" description="暂无评论" />
 					</scroll-view>

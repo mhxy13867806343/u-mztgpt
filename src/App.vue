@@ -70,4 +70,7 @@ uni-image{
 .text-center{
 	text-align: center;
 }
+.iconfont{
+    font-size: 22rpx;
+}
 </style>
