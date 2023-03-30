@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Look: typeof import('./src/components/Chat/look/look.vue')['default']
     MCooment: typeof import('./src/components/MCooment/MCooment.vue')['default']
     MList: typeof import('./src/components/MList/MList.vue')['default']
+    MLogin: typeof import('./src/components/MLogin/MLogin.vue')['default']
     MSearch: typeof import('./src/components/MSearch/MSearch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

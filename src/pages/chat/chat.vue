@@ -1,4 +1,6 @@
 <script setup>
+import useForm from '@/hooks/useForm'
+const {token,isLoginShow}=useForm()
 import adds from '@/components/Chat/adds/adds'
 import look from '@/components/Chat/look/look'
 import toggle from '@/components/Chat/toggle/toggle'
@@ -79,7 +81,7 @@ const onClickPop=item=>{
 
 <template>
 	<van-nav-bar  placeholder fixed title="透视">
-		<template #right>
+		<template #right v-if="token">
 			<van-popover
 				placement="left-start"
 				v-model:show="showPopover" theme="dark">
@@ -100,6 +102,7 @@ const onClickPop=item=>{
 	
 		</template>
 	</van-nav-bar>
+    <m-login :show="isLoginShow" />
 	<van-popup teleport="#app"  v-model:show="showCenter" round :style="{ width:'91%' }">
 		<view class="tel-pop">
 			<component :is="actionsPopList[typePopValue].component"

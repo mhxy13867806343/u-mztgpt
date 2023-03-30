@@ -1,4 +1,6 @@
 <script setup>
+import useForm from '@/hooks/useForm'
+const {isLoginShow}=useForm()
 const list=ref([
 	{
 		url: 'https://img.yzcdn.cn/vant/cat.jpeg',
@@ -108,6 +110,7 @@ const onClickSelect = (option) => {
 };
 </script>
 <template>
+    <m-login :show="isLoginShow" />
 	<view class="content-details" ref="contentDetailsRef">
 	
 		<view class="content-details-scroll">

@@ -1,4 +1,6 @@
 <script setup>
+import useForm from '@/hooks/useForm'
+const {isLoginShow}=useForm()
 import useComment from '@/hooks/useComment'
 const { contentDetailsRef,commentInput,
 	sendText,
@@ -7,6 +9,7 @@ const { contentDetailsRef,commentInput,
 	onInputBoxClear,placeholder}=useComment()
 </script>
 <template>
+    <m-login :show="isLoginShow" />
 	<view class="comment">
 		<view class="comment-list">
 			<view class="comment-list-item icon-count">
