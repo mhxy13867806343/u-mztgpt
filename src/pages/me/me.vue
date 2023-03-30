@@ -1,6 +1,6 @@
 <script setup>
 import useForm from '@/hooks/useForm'
-const {isLoginShow,token}=useForm()
+const {isLoginShow,token,onClickLv}=useForm()
 import useStroe from '@/hooks/useStroe'
 const {clearStorageSync}=useStroe()
 const navList=ref([
@@ -42,10 +42,27 @@ const onClickLogin=()=>{
         }
     });
 }
+//修改头像
+const onClickAvater=()=>{
+    console.log('修改头像')
+}
+const onClickRouter=()=>{
+    uni.navigateTo({
+		url: '/pages/myInfo/myInfo'
+	});
+}
 </script>
 
 <template>
 	<m-login :show="isLoginShow" />
+	<view class="my-avter icon-comment icon-count flex-start">
+<!--		<text class="iconfont  icon-touxiang1" @click="onClickAvater"></text>-->
+		<image  src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg" lazy-load	@click="onClickAvater" />
+		<view class="right">
+            <view @click="onClickRouter">作者信息</view>
+            <view @click.stop="onClickLv"><text>lv</text> <text>1</text></view>
+		</view>
+	</view>
 	<van-cell-group inset v-for="(item,index) in navList" :key="index">
 		<van-cell :title="item1.text" :value="item1.value||''" is-link center v-for="(item1,index1) in item.list" :key="index1"
 		          :to="item1.path"
@@ -55,7 +72,7 @@ const onClickLogin=()=>{
 				<text class="iconfont" :class="item1.icon"></text>
 			</template>
 		</van-cell>
-        <van-button type="primary" block class="quit" v-if="token"
+        <van-button type="primary" block class="quit-btn-fixed" v-if="token"
         @click="onClickLogin"
         >退出</van-button>
 
@@ -64,10 +81,40 @@ const onClickLogin=()=>{
 
 
 <style lang="scss" scoped>
-.quit{
-  position: fixed;
-  bottom:  calc(var(--window-bottom) / 2);
-  left: 0;
-  width: 100%;
+@import "~@/static/style/mpub.scss";
+.my-avter{
+  height: 180rpx;
+  padding: 30rpx 0;
+  margin:0 30rpx;
+  align-items: center;
+  .icon-touxiang1,uni-image{
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 100%;
+  }
+  .icon-touxiang1{
+    font-size: 200rpx;
+  }
+  .right{
+    padding-left: 30rpx;
+    uni-view{
+      &:first-child{
+        font-size: 26rpx;
+		font-weight: bold;
+        color: #656565;
+        margin-bottom: 30rpx;
+      }
+      uni-text{
+        &:first-child{
+          font-size: 22rpx;
+		  color: #a9a9a9;
+        
+        }
+        &:last-child{
+          font-size: 26rpx;
+        }
+      }
+    }
+  }
 }
 </style>

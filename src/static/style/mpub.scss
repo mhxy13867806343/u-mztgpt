@@ -1,0 +1,6 @@
+.quit-btn-fixed{
+  position: fixed;
+  bottom:  calc(var(--window-bottom) / 2);
+  left: 0;
+  width: 100%;
+}

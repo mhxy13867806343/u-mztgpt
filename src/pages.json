@@ -84,6 +84,15 @@
             }
 
         }
+        ,{
+            "path" : "pages/myInfo/myInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

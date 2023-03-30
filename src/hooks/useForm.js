@@ -30,10 +30,16 @@ export default ()=>{
        await setStorageSync('user',data)
       await  setStorageSync('token',token)
     }
+    const onClickLv=()=>{
+        uni.navigateTo({
+            url: '/pages/level/level'
+        });
+    }
     return {
         token,
         isLoginShow,
         onCloseForm,
-        onLogin
+        onLogin,
+        onClickLv
     }
 }

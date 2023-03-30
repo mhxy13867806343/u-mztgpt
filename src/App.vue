@@ -11,7 +11,9 @@ export default {
   },
 }
 </script>
-
+<style lang="scss">
+@import "~@/static/style/mpub.scss";
+</style>
 <style>
 /*每个页面公共css */
 .list-text{
