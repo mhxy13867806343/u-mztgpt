@@ -1,6 +1,8 @@
 <script setup>
 import useForm from '@/hooks/useForm'
 const {token,isLoginShow}=useForm()
+import useStroe from '@/hooks/useStroe'
+const {removeStorageSync,getStorageSync,setStorageSync}=useStroe()
 import adds from '@/components/Chat/adds/adds'
 import look from '@/components/Chat/look/look'
 import toggle from '@/components/Chat/toggle/toggle'
@@ -12,7 +14,11 @@ const showPopover=ref(false)
 const showCenter=ref(false)
 const typePopValue=ref(-1)//0添加key,1查看key,2切换key,3保存聊天记录,4删除key和聊天记录,5查看等级
 const qinput=ref('');//
+const sessionInput=ref('');//会话输入框
+const isSessionShow=ref(false)//是否显示会话
+const sessionList=ref([])//会话列表
 const isDisabled=ref(false)
+const showLeft=ref(false)
 const actionsPopList=ref([
 	{
 		text:'添加key',
@@ -63,6 +69,14 @@ const actionsPopList=ref([
 		component:levels
 	}
 ])
+const chatSessionKey='chat-session'//会话缓存key
+onShow(()=>{
+    const key=getStorageSync(chatSessionKey)
+    console.log(key,'abcdef')
+    if(key){
+        sessionList.value=key
+    }
+})
 const onClickPop=item=>{
 	if(item.isDisabled){
 		showNotify({
@@ -77,10 +91,81 @@ const onClickPop=item=>{
 	showCenter.value=true
 	showPopover.value=false
 }
+//清除所有
+const onSessionClear=()=>{
+    removeStorageSync(chatSessionKey)
+	showNotify({
+		message: `清除成功`,
+		color: '#fff',
+		background: 'var(--van-notify-success-background)',
+		duration: 1500,
+	})
+	showLeft.value=false
+    sessionList.value=[]
+}
+//新建会话
+const onClickSessionAdd=()=>{
+	isSessionShow.value=true
+ 
+}
+const onClickSessionAddBtn=()=>{
+ 
+	const t=sessionList.value.filter(item=>item.name===sessionInput.value)
+	if(t.length){
+        		showNotify({
+			message: `会话名称已存在`,
+			color: '#fff',
+			background: 'var(--van-notify-danger-background)',
+			duration: 1500,
+		})
+		return
+	}
+	sessionList.value.unshift({
+		name:sessionInput.value
+    })
+    setStorageSync(chatSessionKey,sessionList.value)
+	isSessionShow.value=false
+    sessionInput.value=''
+}
 </script>
 
 <template>
+    <van-popup
+            v-model:show="showLeft"
+            position="left"
+            :style="{ width: '65%', height: '100%' }"
+    >
+	    <view class="add-icon" @click="onClickSessionAdd">
+		    <text class="iconfont icon-tianjia1"></text>
+		    <text>新建会话</text>
+	    </view>
+        <van-cell-group inset v-if="isSessionShow">
+            <van-field clearable v-model="sessionInput"  placeholder="请输入会话名称20字内"
+            maxlength="20"
+            >
+                <template #button>
+                    <van-button size="mini" type="primary" :disabled="!sessionInput.length"
+                    @click="onClickSessionAddBtn"
+                    >添加会话</van-button>
+                </template>
+            </van-field>
+        </van-cell-group>
+        <scroll-view  scroll-y :style="{height:`calc(60% - 100rpx)`}"
+                     class="scroll-Y-calc">
+            <view class="scroll-view-item" v-for="(item,index) in sessionList" :key="index">
+	            				<text>{{item.name}}</text>
+            </view>
+            <van-empty v-if="!sessionList.length" image-size="30" description="暂无相关会话数据" />
+        </scroll-view>
+        <view class="add-icon" @click="onSessionClear">
+            <text class="iconfont icon-qingchushujuku"></text>
+            <text>清除所有</text>
+        </view>
+    </van-popup>
 	<van-nav-bar  placeholder fixed title="透视">
+		<template #left v-if="token">
+            <text class="iconfont icon-menu"  @click="showLeft=true"/>
+		</template>
 		<template #right v-if="token">
 			<van-popover
 				placement="left-start"
@@ -150,6 +235,34 @@ const onClickPop=item=>{
 
 
 <style lang="scss" scoped>
+::v-deep .van-popup--left{
+  background-color: rgba(32,33,35,.91);
+  .add-icon{
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    margin-bottom: 20rpx;
+    border:1px solid hsla(0,0%,100%,.2) ;
+    uni-text{
+      color: #fff;
+      &:last-child{
+        padding-left: 10rpx;
+        font-size: 22rpx;
+      }
+    }
+  }
+  .scroll-Y-calc{
+    border-bottom: 1px solid hsla(0,0%,100%,.2) ;
+    .scroll-view-item{
+      color: #fff;
+      font-size: 20rpx;
+      padding:6rpx;
+      text-indent: 10rpx;
+      height: 30rpx;
+      line-height: 30rpx;
+    }
+  }
+}
 .van-cell--center {
 	background: #1c1c1e;
 	color: #fff;
