@@ -69,6 +69,8 @@ const actionsPopList=ref([
 		component:levels
 	}
 ])
+const chatList=ref([])//聊天列表
+const chatInputStyle=ref('')//聊天输入框样式
 const chatSessionKey='chat-session'//会话缓存key
 onShow(()=>{
     const key=getStorageSync(chatSessionKey)
@@ -76,6 +78,16 @@ onShow(()=>{
     if(key){
         sessionList.value=key
     }
+})
+onMounted(()=>{
+	const tabberContentListCls=document.querySelector('.tabber-content-list')
+    uni.getSystemInfo({
+        success: res=> {
+            const {screenHeight}=res
+            chatInputStyle.value=((screenHeight - tabberContentListCls.clientHeight)/5)+'rpx'
+        }
+    });
+	
 })
 const onClickPop=item=>{
 	if(item.isDisabled){
@@ -130,6 +142,23 @@ const onClickSessionAddBtn=()=>{
 const onClickSession=item=>{
 	console.log(item.name,'点击的时候请求')
 }
+const onClickCopy=data=>{
+    uni.setClipboardData({
+        data,
+        success:()=>{
+           uni.showToast({
+			   title:'复制成功,分享给别人吧',
+			   icon:'none'
+		   })
+        },
+	    		fail:()=>{
+			uni.showToast({
+				title:'复制失败',
+				icon:'none'
+			})
+		}
+    });
+}
 </script>
 
 <template>
@@ -162,7 +191,7 @@ const onClickSession=item=>{
             </view>
             <van-empty v-if="!sessionList.length" image-size="30" description="暂无相关会话数据" />
         </scroll-view>
-        <view class="add-icon" @click="onSessionClear">
+        <view class="add-icon" @click="onSessionClear" v-if="!sessionList.length">
             <text class="iconfont icon-qingchushujuku"></text>
             <text>清除所有</text>
         </view>
@@ -200,33 +229,39 @@ const onClickSession=item=>{
 			></component>
 		</view>
 	</van-popup>
-	
-	<view class="chat-home">
-		<view class="chat-q-input icon-count flex-start">
-			<view>
-				<image src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"></image>
-			</view>
-			<view class="chat-q-content">
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-			</view>
-		</view>
-		<view class="chat-q icon-count flex-start">
-			<view>
-				<image src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"></image>
-			</view>
-			<view class="chat-q-content">
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-				vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-			</view>
-		</view>
-	</view>
+
+    <scroll-view  scroll-y :style="{
+        height:` calc(100vh - ${chatInputStyle})`,
+    }" class="tabber-content-list">
+        <view class="chat-home" :class="{'chat-home-last':index===9}" v-for="(item,index) in 10" :key="index">
+            <view class="chat-q-input icon-count flex-start">
+                <view class="chat-q-input-key">
+                    <text>Q</text>
+                </view>
+                <view class="chat-q-content">
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                </view>
+            </view>
+            <view class="chat-q icon-count flex-start icon-comment">
+                <view class="chat-copy icon-comment-abs">
+                    <text class="iconfont icon-fuzhi" @click="onClickCopy(1)"></text>
+                    <text class="iconfont icon-yichuli"></text>
+                </view>
+                <view class="chat-q-content">
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+
 	<view class="filed-bot tabber-content-list">
 		<van-field clearable v-model="qinput" :disabled="isDisabled" placeholder="请输入你想要问的内容吧">
 			<template #button v-if="qinput.length">
@@ -278,6 +313,7 @@ const onClickSession=item=>{
 }
 .chat-home{
 	padding:0 20rpx;
+    margin:40rpx 0;
 	uni-image{
 		width: 50rpx;
 		height: 50rpx;
@@ -285,17 +321,41 @@ const onClickSession=item=>{
 	.chat-q-input{
 		margin-bottom: 20rpx;
 		padding:12rpx;
+	    .chat-q-input-key{
+	      uni-text{
+	        background: green;
+	        color: #fff;
+	        padding: 10rpx;
+	        width: 50rpx;
+	        height: 50rpx;
+	        border-radius: 100%;
+            display: block;
+            text-align: center;
+	      }
+	    }
 	}
 	.chat-q{
 		background-color: rgb(230 230 230);
 		padding:12rpx;
-		
-		
+	  margin-top:50rpx;
+	  .chat-copy{
+	    right:0;
+	    top:-30rpx;
+	    
+	    .icon-fuzhi,.icon-yichuli{
+          font-size: 50rpx;
+	    }
+	  }
 	}
 	.chat-q-content{
-		padding-left: 20rpx;
+      padding: 20rpx;
+      margin-left: 20rpx;
 		font-size: 28rpx;
+      background-color: rgba(230, 230, 230,.78);
 	}
+}
+.chat-home-last{
+  padding-bottom: calc(var(--window-bottom) / 2);
 }
 .filed-bot{
 	position: fixed;

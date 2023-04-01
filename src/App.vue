@@ -58,6 +58,9 @@ uni-image{
 .icon-comment{
 	position: relative;
 }
+.icon-comment-abs{
+	position: absolute;
+}
 .tabber-content-list{
 	padding-bottom: calc(var(--window-bottom) / 2);
 }
