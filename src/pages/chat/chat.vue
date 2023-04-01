@@ -106,7 +106,6 @@ const onSessionClear=()=>{
 //新建会话
 const onClickSessionAdd=()=>{
 	isSessionShow.value=true
- 
 }
 const onClickSessionAddBtn=()=>{
  
@@ -126,6 +125,10 @@ const onClickSessionAddBtn=()=>{
     setStorageSync(chatSessionKey,sessionList.value)
 	isSessionShow.value=false
     sessionInput.value=''
+}
+//点击的时候请求
+const onClickSession=item=>{
+	console.log(item.name,'点击的时候请求')
 }
 </script>
 
@@ -152,7 +155,9 @@ const onClickSessionAddBtn=()=>{
         </van-cell-group>
         <scroll-view  scroll-y :style="{height:`calc(60% - 100rpx)`}"
                      class="scroll-Y-calc">
-            <view class="scroll-view-item" v-for="(item,index) in sessionList" :key="index">
+            <view class="scroll-view-item" v-for="(item,index) in sessionList" :key="index"
+            @click="onClickSession(item)"
+            >
 	            				<text>{{item.name}}</text>
             </view>
             <van-empty v-if="!sessionList.length" image-size="30" description="暂无相关会话数据" />
