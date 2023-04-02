@@ -68,13 +68,98 @@ const actionsPopList=ref([
 		value:5,
 		component:levels
 	}
-])
-const chatList=ref([])//聊天列表
+])//右上角菜单数据
+const chatList=ref([
+    {
+        name:'测试abc',
+	    sessionList:[
+            {
+                name:`
+                 vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                `
+            }
+	    ]
+    },
+    {
+        name:'测试abc',
+        sessionList:[
+            {
+                name:`
+                 vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                `
+            }
+        ]
+    },
+    {
+        name:'测试abc',
+        sessionList:[
+            {
+                name:`
+                 vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                `
+            }
+        ]
+    }
+])//聊天列表
+const chatDyList=ref([
+        {"name": "Python编程语言入门指南"},
+        {"name": "如何使用GPT-3生成自然语言文本"},
+        {"name": "数字人工智能的发展与未来"},
+        {"name": "最新的AI技术在游戏开发中的应用"},
+        {"name": "如何用Python构建自己的聊天机器人"},
+        {"name": "数字人工智能对医学领域的影响"},
+        {"name": "LOL电竞比赛的技术分析与策略讲解"},
+        {"name": "如何使用GPT-2生成虚构小说"},
+        {"name": "Python数据可视化工具的使用方法"},
+        {"name": "数字人工智能对社会的影响与挑战"},
+        {"name": "游戏音效设计中的数字信号处理技术"},
+        {"name": "使用Python进行数据分析的基本步骤"},
+        {"name": "数字人工智能在智能家居领域的应用"},
+        {"name": "LOL中ADCarry的战术选择与实战分析"},
+        {"name": "如何使用GPT-3生成程序代码"},
+        {"name": "Python网络爬虫的原理与实现"},
+        {"name": "数字人工智能对工业自动化的影响"},
+        {"name": "游戏设计中的情感体验与用户研究"},
+        {"name": "使用Python进行文本分析的技术方法"},
+        {"name": "数字人工智能在智能交通领域的应用"},
+        {"name": "LOL中打野选手的战术选择与实战分析"},
+        {"name": "如何使用GPT-2生成广告文案"},
+        {"name": "Python机器学习的基础算法与实践"},
+        {"name": "数字人工智能对金融行业的影响与变革"},
+        {"name": "游戏剧情设计中的叙事技巧与创新思维"},
+        {"name": "使用Python进行图像处理的技术方法"},
+        {"name": "数字人工智能在教育领域的应用与发展"},
+        {"name": "LOL中中单选手的战术选择与实战分析"},
+        {"name": "如何使用GPT-3生成艺术创作作品"}
+    ])//随机生成聊天动态列表
 const chatInputStyle=ref('')//聊天输入框样式
 const chatSessionKey='chat-session'//会话缓存key
 onShow(()=>{
     const key=getStorageSync(chatSessionKey)
-    console.log(key,'abcdef')
     if(key){
         sessionList.value=key
     }
@@ -119,24 +204,45 @@ const onSessionClear=()=>{
 const onClickSessionAdd=()=>{
 	isSessionShow.value=true
 }
+const isSessionTextFilter=(name)=>{
+    const t=sessionList.value.filter(item=>item.name===name)
+	let filter=true
+    if(t.length){
+        showNotify({
+            message: `会话名称或内容已存在`,
+            color: '#fff',
+            background: 'var(--van-notify-danger-background)',
+            duration: 1500,
+        })
+        filter=false
+    }
+    return filter
+}
 const onClickSessionAddBtn=()=>{
- 
-	const t=sessionList.value.filter(item=>item.name===sessionInput.value)
-	if(t.length){
-        		showNotify({
-			message: `会话名称已存在`,
-			color: '#fff',
-			background: 'var(--van-notify-danger-background)',
-			duration: 1500,
-		})
-		return
+    const t=isSessionTextFilter(sessionInput.value)
+	if(t){
+        onSaveSession(sessionInput.value)
+        isSessionShow.value=false
+        sessionInput.value=''
 	}
-	sessionList.value.unshift({
-		name:sessionInput.value
+ 
+}
+const onClickChatDy=name=>{
+    qinput.value=name
+    const t=isSessionTextFilter(qinput.value)
+    if(t) {
+        onSaveSession(name)
+    }
+    
+}
+const onSaveSession=(name)=>{
+    //保存会话
+    sessionList.value.unshift({
+        name,
+	    sessionChildList:[],// 存放聊天内容
+	    isSessionChild:false,// 是否是有右边对话内容
     })
     setStorageSync(chatSessionKey,sessionList.value)
-	isSessionShow.value=false
-    sessionInput.value=''
 }
 //点击的时候请求
 const onClickSession=item=>{
@@ -191,12 +297,12 @@ const onClickCopy=data=>{
             </view>
             <van-empty v-if="!sessionList.length" image-size="30" description="暂无相关会话数据" />
         </scroll-view>
-        <view class="add-icon" @click="onSessionClear" v-if="!sessionList.length">
+        <view class="add-icon" @click="onSessionClear" v-if="sessionList.length">
             <text class="iconfont icon-qingchushujuku"></text>
             <text>清除所有</text>
         </view>
     </van-popup>
-	<van-nav-bar  placeholder fixed title="透视">
+	<van-nav-bar  placeholder fixed title="聊天">
 		<template #left v-if="token">
             <text class="iconfont icon-menu"  @click="showLeft=true"/>
 		</template>
@@ -233,35 +339,34 @@ const onClickCopy=data=>{
     <scroll-view  scroll-y :style="{
         height:` calc(100vh - ${chatInputStyle})`,
     }" class="tabber-content-list">
-        <view class="chat-home" :class="{'chat-home-last':index===9}" v-for="(item,index) in 10" :key="index">
+        <view class="chat-home" :class="{'chat-home-last':index===9}" v-for="(item,index) in chatList" :key="index">
             <view class="chat-q-input icon-count flex-start">
                 <view class="chat-q-input-key">
                     <text>Q</text>
                 </view>
                 <view class="chat-q-content">
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    {{ item.name}}
                 </view>
             </view>
-            <view class="chat-q icon-count flex-start icon-comment">
+            <view class="chat-q icon-count flex-start icon-comment" v-for="(sitem,sindex) in item.sessionList" :key="sindex">
                 <view class="chat-copy icon-comment-abs">
-                    <text class="iconfont icon-fuzhi" @click="onClickCopy(1)"></text>
+                    <text class="iconfont icon-fuzhi" @click="onClickCopy(sitem.name)"></text>
                     <text class="iconfont icon-yichuli"></text>
                 </view>
                 <view class="chat-q-content">
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
-                    vue3 嵌套el-table拖拽解决 使用sortablejs处理的
+                    {{ sitem.name }}
                 </view>
             </view>
         </view>
     </scroll-view>
-
+<!--	<view class="chat-more iconfont icon-gengduo"></view>-->
+    <scroll-view class="scroll-view_H-chat" scroll-x>
+        <view class="scroll-view-item_H uni-bg-red" v-for="(item,index) in chatDyList" :key="index"
+        @click="onClickChatDy(item.name)"
+        >
+	        <text>{{  index+1}}.</text>{{ item.name }}
+        </view>
+    </scroll-view>
 	<view class="filed-bot tabber-content-list">
 		<van-field clearable v-model="qinput" :disabled="isDisabled" placeholder="请输入你想要问的内容吧">
 			<template #button v-if="qinput.length">
@@ -269,7 +374,6 @@ const onClickCopy=data=>{
 			</template>
 		</van-field>
 	</view>
-	<van-back-top />
 
 </template>
 
@@ -296,7 +400,7 @@ const onClickCopy=data=>{
     .scroll-view-item{
       color: #fff;
       font-size: 20rpx;
-      padding:6rpx;
+      padding:20rpx;
       text-indent: 10rpx;
       height: 30rpx;
       line-height: 30rpx;
@@ -357,10 +461,34 @@ const onClickCopy=data=>{
 .chat-home-last{
   padding-bottom: calc(var(--window-bottom) / 2);
 }
+.filed-bot,.chat-more,.scroll-view_H-chat{
+  bottom: 0;
+  position: fixed;
+	
+}
 .filed-bot{
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
+  left: 0;
+}
+.scroll-view_H-chat,.chat-more{
+  bottom: calc(var(--window-bottom) + 1rpx );
+  z-index: 1;
+}
+.scroll-view_H-chat,.filed-bot {
+  width: 100%;
+}
+.scroll-view_H-chat{
+  white-space: nowrap;
+  background: #d5d5d5;
+  .scroll-view-item_H {
+    display: inline-block;
+    text-align: center;
+    font-size: 20rpx;
+    padding:14rpx;
+  }
+}
+.chat-more{
+  font-size: 100rpx;
+  right:0;
+  
 }
 </style>
