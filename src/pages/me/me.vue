@@ -21,6 +21,11 @@ const navList=ref([
 				text: '评论',
 				path: '/pages/comments/comments'
 			},
+            {
+                icon: 'icon-gengduo1',
+                text: '更多',
+                path: '/pages/more/more'
+            },
 		]
 	}
 ])

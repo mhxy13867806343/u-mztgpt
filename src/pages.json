@@ -93,6 +93,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/more/more",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "更多",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
