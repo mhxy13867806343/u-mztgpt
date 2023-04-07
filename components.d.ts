@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     MList: typeof import('./src/components/MList/MList.vue')['default']
     MLogin: typeof import('./src/components/MLogin/MLogin.vue')['default']
     MSearch: typeof import('./src/components/MSearch/MSearch.vue')['default']
+    MTab: typeof import('./src/components/MTab/MTab.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Save: typeof import('./src/components/Chat/save/save.vue')['default']

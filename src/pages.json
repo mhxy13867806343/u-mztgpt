@@ -102,6 +102,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/tag/tag",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "云标签",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

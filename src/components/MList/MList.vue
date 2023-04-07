@@ -13,6 +13,11 @@ const onClickDetlis = (item) => {
 		url: `/pages/mmDetails/mmDetails?id=${item}`
 	})
 }
+const onClickRouterag=()=>{
+    uni.navigateTo({
+		url: `/pages/tag/tag`
+	})
+}
 </script>
 <template>
 	<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -42,7 +47,9 @@ const onClickDetlis = (item) => {
 		</van-list>
 	</van-pull-refresh>
 <!--	<van-empty image-size="100" description="描述文字" v-if="!list.length&&finished"/>-->
-
+<view class="m-tab" @click.stop="onClickRouterag">
+	<text class="iconfont icon-yun"></text>
+</view>
 </template>
 
 
@@ -53,10 +60,19 @@ const onClickDetlis = (item) => {
 }
 .icon-pinglun1{
 	position: absolute;
-	top:0;
-	right: 0;
-	z-index: 12;
+  top:0;
 	color: #fff;
 }
+.m-tab,.icon-pinglun1{
 
+  right: 0;
+  z-index: 12;
+}
+.m-tab{
+  position: fixed;
+  bottom: 300rpx;
+  .icon-yun{
+    font-size: 60rpx;
+  }
+}
 </style>
