@@ -1,3 +1,4 @@
+import {requests} from '@/utils/requests'
 export default ()=>{
     const list = ref([]);//列表数据
     const search = ref('');//搜索关键字
@@ -38,6 +39,23 @@ export default ()=>{
         onClearList()
         await getListOld()
     }
+    const getTabList=(title)=>{
+        requests({
+            url: 'home/tag',
+            data:{
+                title
+            },
+        }).then(res=>{
+            list.value=res.list
+            total.value=res.count
+            if(!res.list.length){
+                loading.value=false
+            }
+        }).catch(err=>{
+            loading.value=false
+        })
+    }
+    
     return {
         list,
         search,
@@ -45,8 +63,10 @@ export default ()=>{
         loading,
         finished,
         onRefresh,
+        total,
         refreshing,
         onSearch,
-        onCancel
+        onCancel,
+        getTabList
     };
 }

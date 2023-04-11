@@ -1,5 +1,7 @@
 
 <script setup>
+    import useList from "@/hooks/useList";
+    const {search}=useList()
 	//导航
 	const navList=ref([
 		{
@@ -182,8 +184,6 @@
 		},
 		
 	])
-	//搜索内容
-	const search=ref('')
 	//定时器
 	let timer=null
 	onMounted(()=>{

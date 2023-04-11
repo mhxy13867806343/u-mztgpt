@@ -55,24 +55,5 @@ const onClickRouterag=()=>{
 
 <style scoped lang="scss">
 @import "~@/static/style/pub.scss";
-.iconfont{
-	font-size: 28rpx;
-}
-.icon-pinglun1{
-	position: absolute;
-  top:0;
-	color: #fff;
-}
-.m-tab,.icon-pinglun1{
-
-  right: 0;
-  z-index: 12;
-}
-.m-tab{
-  position: fixed;
-  bottom: 300rpx;
-  .icon-yun{
-    font-size: 60rpx;
-  }
-}
+@import "~@/static/style/pub1.scss";
 </style>

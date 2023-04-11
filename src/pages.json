@@ -111,6 +111,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/mtag/mtag",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "标签组",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
